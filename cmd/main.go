@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 
+	//_ "github.com/juanmaabanto/go-user-ms/docs"
+
 	"github.com/joho/godotenv"
 	"github.com/juanmaabanto/go-user-ms/internal/ports"
 	"github.com/juanmaabanto/go-user-ms/internal/service"
@@ -12,6 +14,15 @@ import (
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
+// @title User API
+// @version v1
+// @description Specifying services for users.
+
+// @contact.name Juan Manuel Abanto Mera
+// @contact.email jmanuelabanto@gmail.com
+
+// @license.name MIT License
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 func main() {
 	err := godotenv.Load()
 	if err != nil {
@@ -33,7 +44,7 @@ type ServerInterface interface {
 	CreateUser(c echo.Context) error
 	ReadUser(c echo.Context) error
 	UpdateUser(c echo.Context) error
-	// DeleteUser(c echo.Context) error
+	DeleteUser(c echo.Context) error
 }
 
 func Handler(si ServerInterface, router *echo.Echo) {
@@ -47,7 +58,7 @@ func Handler(si ServerInterface, router *echo.Echo) {
 	router.GET("/*", echoSwagger.WrapHandler)
 
 	//user
-	// api.DELETE("/users/:id", si.DeleteUser)
+	api.DELETE("/users/:id", si.DeleteUser)
 	api.GET("/users/:id", si.ReadUser)
 	api.PATCH("/users", si.UpdateUser)
 	api.POST("/users", si.CreateUser)

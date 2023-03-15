@@ -78,20 +78,6 @@ func (h HttpServer) ReadUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, result)
 }
 
-func Simple(verr validator.ValidationErrors) map[string]string {
-	errs := make(map[string]string)
-
-	for _, f := range verr {
-		err := f.ActualTag()
-		if f.Param() != "" {
-			err = fmt.Sprintf("%s=%s", err, f.Param())
-		}
-		errs[f.Field()] = err
-	}
-
-	return errs
-}
-
 // UpdateUser godoc
 // @Summary Update a user.
 // @Tags Users
@@ -123,4 +109,41 @@ func (h HttpServer) UpdateUser(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusNoContent, nil)
+}
+
+// DeleteUser godoc
+// @Summary Delete a user by Id.
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path string  true  "User Id"
+// @Success 204
+// @Failure 400 {object} responses.ErrorResponse
+// @Failure 404 {object} responses.ErrorResponse
+// @Failure 500 {object} responses.ErrorResponse
+// @Router /api/v1/users/{id} [delete]
+func (h HttpServer) DeleteUser(c echo.Context) error {
+	item := command.DeleteUser{Id: c.Param("id")}
+
+	err := h.app.Commands.DeleteUser.Handle(c.Request().Context(), item)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return c.JSON(http.StatusNoContent, nil)
+}
+
+func Simple(verr validator.ValidationErrors) map[string]string {
+	errs := make(map[string]string)
+
+	for _, f := range verr {
+		err := f.ActualTag()
+		if f.Param() != "" {
+			err = fmt.Sprintf("%s=%s", err, f.Param())
+		}
+		errs[f.Field()] = err
+	}
+
+	return errs
 }

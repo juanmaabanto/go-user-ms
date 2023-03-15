@@ -13,6 +13,7 @@ type Application struct {
 type Commands struct {
 	CreateUser command.CreateUserHandler
 	UpdateUser command.UpdateUserHandler
+	DeleteUser command.DeleteUserHandler
 }
 
 type Queries struct {

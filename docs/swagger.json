@@ -1,0 +1,17 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Specifying services for users.",
+        "title": "User API",
+        "contact": {
+            "name": "Juan Manuel Abanto Mera",
+            "email": "jmanuelabanto@gmail.com"
+        },
+        "license": {
+            "name": "MIT License",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "v1"
+    },
+    "paths": {}
+}

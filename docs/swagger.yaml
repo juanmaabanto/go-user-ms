@@ -1,0 +1,12 @@
+info:
+  contact:
+    email: jmanuelabanto@gmail.com
+    name: Juan Manuel Abanto Mera
+  description: Specifying services for users.
+  license:
+    name: MIT License
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: User API
+  version: v1
+paths: {}
+swagger: "2.0"
