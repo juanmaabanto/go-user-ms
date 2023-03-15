@@ -14,8 +14,12 @@ type MockRepository[D genrepo.Document] struct {
 func (mock MockRepository[D]) FindById(ctx context.Context, id string) (*D, error) {
 	args := mock.Called(ctx, id)
 	result := args.Get(0)
+	if result == nil {
+		return nil, args.Error(1)
+	}
 
-	return result.(*D), args.Error(0)
+	model := result.(D)
+	return &model, args.Error(1)
 }
 
 func (mock MockRepository[D]) InsertOne(ctx context.Context, document D) (string, error) {

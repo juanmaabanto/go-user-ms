@@ -7,6 +7,7 @@ import (
 	"github.com/go-playground/validator"
 	"github.com/juanmaabanto/go-user-ms/internal/app"
 	"github.com/juanmaabanto/go-user-ms/internal/app/command"
+	"github.com/juanmaabanto/go-user-ms/internal/app/query"
 	"github.com/labstack/echo/v4"
 )
 
@@ -52,6 +53,29 @@ func (h HttpServer) CreateUser(c echo.Context) error {
 	c.Response().Header().Set("location", c.Request().URL.String()+"/"+id)
 
 	return c.JSON(http.StatusCreated, id)
+}
+
+// ReadUser godoc
+// @Summary Get a user by Id.
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path string  true  "User Id"
+// @Success 200 {object} response.UserResponse
+// @Failure 400 {object} responses.ErrorResponse
+// @Failure 404 {object} responses.ErrorResponse
+// @Failure 500 {object} responses.ErrorResponse
+// @Router /api/v1/users/{id} [get]
+func (h HttpServer) ReadUser(c echo.Context) error {
+	item := query.GetUserById{Id: c.Param("id")}
+
+	result, err := h.app.Queries.GetUserById.Handle(c.Request().Context(), item)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return c.JSON(http.StatusOK, result)
 }
 
 func Simple(verr validator.ValidationErrors) map[string]string {

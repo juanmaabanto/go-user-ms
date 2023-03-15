@@ -5,6 +5,7 @@ import (
 
 	"github.com/juanmaabanto/go-user-ms/internal/app"
 	"github.com/juanmaabanto/go-user-ms/internal/app/command"
+	"github.com/juanmaabanto/go-user-ms/internal/app/query"
 	"github.com/juanmaabanto/go-user-ms/internal/repository"
 	"github.com/juanmaabanto/go-user-ms/pkg/mongo/database"
 )
@@ -21,6 +22,8 @@ func NewApplication(ctx context.Context, dbname, uri string) (app.Application, e
 		Commands: app.Commands{
 			CreateUser: command.NewCreateUserHandler(repos),
 		},
-		Queries: app.Queries{},
+		Queries: app.Queries{
+			GetUserById: query.NewGetUserByIdHandler(repos),
+		},
 	}, nil
 }

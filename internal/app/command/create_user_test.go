@@ -38,7 +38,7 @@ func Test_Handle_CreateUser_Insert_Completed(t *testing.T) {
 	assert.Equal(t, expected, result)
 }
 
-func Test_Handle_CreateMeasureType_Insert_Error(t *testing.T) {
+func Test_Handle_CreateUser_Insert_Error(t *testing.T) {
 	// Arrange
 	mockRepo := new(mocks.MockRepository[model.User])
 	repos := repository.Repositories{

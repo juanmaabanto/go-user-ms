@@ -31,7 +31,7 @@ func main() {
 
 type ServerInterface interface {
 	CreateUser(c echo.Context) error
-	// ReadUser(c echo.Context) error
+	ReadUser(c echo.Context) error
 	// UpdateUser(c echo.Context) error
 	// DeleteUser(c echo.Context) error
 }
@@ -48,7 +48,7 @@ func Handler(si ServerInterface, router *echo.Echo) {
 
 	//user
 	// api.DELETE("/users/:id", si.DeleteUser)
-	// api.GET("/users/:id", si.CreateUser)
+	api.GET("/users/:id", si.ReadUser)
 	// api.PATCH("/users", si.UpdateUser)
 	api.POST("/users", si.CreateUser)
 }
