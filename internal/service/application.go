@@ -21,6 +21,7 @@ func NewApplication(ctx context.Context, dbname, uri string) (app.Application, e
 	return app.Application{
 		Commands: app.Commands{
 			CreateUser: command.NewCreateUserHandler(repos),
+			UpdateUser: command.NewUpdateUserHandler(repos),
 		},
 		Queries: app.Queries{
 			GetUserById: query.NewGetUserByIdHandler(repos),

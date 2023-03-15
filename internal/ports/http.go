@@ -91,3 +91,36 @@ func Simple(verr validator.ValidationErrors) map[string]string {
 
 	return errs
 }
+
+// UpdateUser godoc
+// @Summary Update a user.
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param command body command.UpdateUser true "Object to be modified."
+// @Success 204
+// @Failure 400 {object} responses.ErrorResponse
+// @Failure 404 {object} responses.ErrorResponse
+// @Failure 422 {object} responses.ErrorResponse
+// @Failure 500 {object} responses.ErrorResponse
+// @Router /api/v1/users [patch]
+func (h HttpServer) UpdateUser(c echo.Context) error {
+	item := command.UpdateUser{}
+
+	if err := c.Bind(&item); err != nil {
+		panic(err)
+	}
+
+	if err := c.Validate(item); err != nil {
+		validationErrors := err.(validator.ValidationErrors)
+		return c.JSON(http.StatusUnprocessableEntity, Simple(validationErrors))
+	}
+
+	err := h.app.Commands.UpdateUser.Handle(c.Request().Context(), item)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return c.JSON(http.StatusNoContent, nil)
+}
