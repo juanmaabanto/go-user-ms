@@ -8,9 +8,9 @@ import (
 
 type User struct {
 	Id          primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	UserName    string             `bson:"userName"`
 	FirstName   string             `bson:"firstName"`
 	LastName    string             `bson:"lastName"`
-	Age         int                `bson:"age"`
 	Email       string             `bson:"email"`
 	PhoneNumber string             `bson:"phoneNumber"`
 	BirthDate   time.Time          `json:"birthDate" bson:"birthDate"`

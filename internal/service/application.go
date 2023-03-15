@@ -2,9 +2,9 @@ package service
 
 import (
 	"context"
-	"log"
 
 	"github.com/juanmaabanto/go-user-ms/internal/app"
+	"github.com/juanmaabanto/go-user-ms/internal/app/command"
 	"github.com/juanmaabanto/go-user-ms/internal/repository"
 	"github.com/juanmaabanto/go-user-ms/pkg/mongo/database"
 )
@@ -16,10 +16,11 @@ func NewApplication(ctx context.Context, dbname, uri string) (app.Application, e
 	}
 
 	repos := repository.InitRepositories(db)
-	log.Print(repos)
 
 	return app.Application{
-		Commands: app.Commands{},
-		Queries:  app.Queries{},
+		Commands: app.Commands{
+			CreateUser: command.NewCreateUserHandler(repos),
+		},
+		Queries: app.Queries{},
 	}, nil
 }
