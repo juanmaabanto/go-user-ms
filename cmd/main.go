@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	//_ "github.com/juanmaabanto/go-user-ms/docs"
+	_ "github.com/juanmaabanto/go-user-ms/docs"
 
 	"github.com/joho/godotenv"
 	"github.com/juanmaabanto/go-user-ms/internal/ports"

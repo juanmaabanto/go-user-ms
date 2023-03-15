@@ -1,3 +1,63 @@
+definitions:
+  command.CreateUser:
+    properties:
+      birthDate:
+        type: string
+      email:
+        maxLength: 50
+        type: string
+      firstName:
+        maxLength: 20
+        type: string
+      lastName:
+        maxLength: 20
+        type: string
+      phoneNumber:
+        maxLength: 50
+        type: string
+      userName:
+        maxLength: 10
+        type: string
+    required:
+    - birthDate
+    - email
+    - firstName
+    - lastName
+    - phoneNumber
+    - userName
+    type: object
+  command.UpdateUser:
+    properties:
+      birthDate:
+        type: string
+      email:
+        maxLength: 50
+        type: string
+      firstName:
+        maxLength: 20
+        type: string
+      id:
+        maxLength: 24
+        minLength: 24
+        type: string
+      lastName:
+        maxLength: 20
+        type: string
+      phoneNumber:
+        maxLength: 50
+        type: string
+      userName:
+        maxLength: 10
+        type: string
+    required:
+    - birthDate
+    - email
+    - firstName
+    - id
+    - lastName
+    - phoneNumber
+    - userName
+    type: object
 info:
   contact:
     email: jmanuelabanto@gmail.com
@@ -8,5 +68,105 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: User API
   version: v1
-paths: {}
+paths:
+  /api/v1/users:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: Object to be modified.
+        in: body
+        name: command
+        required: true
+        schema:
+          $ref: '#/definitions/command.UpdateUser'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: ""
+        "400":
+          description: ""
+        "404":
+          description: ""
+        "422":
+          description: ""
+        "500":
+          description: ""
+      summary: Update a user.
+      tags:
+      - Users
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Object to be created.
+        in: body
+        name: command
+        required: true
+        schema:
+          $ref: '#/definitions/command.CreateUser'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Id of the created object
+          schema:
+            type: string
+        "400":
+          description: ""
+        "422":
+          description: ""
+        "500":
+          description: ""
+      summary: Create a new user.
+      tags:
+      - Users
+  /api/v1/users/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: User Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: ""
+        "400":
+          description: ""
+        "404":
+          description: ""
+        "500":
+          description: ""
+      summary: Delete a user by Id.
+      tags:
+      - Users
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: User Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: ""
+        "404":
+          description: ""
+        "500":
+          description: ""
+      summary: Get a user by Id.
+      tags:
+      - Users
 swagger: "2.0"

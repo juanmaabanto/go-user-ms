@@ -28,9 +28,9 @@ func NewHttpServer(application app.Application) HttpServer {
 // @Produce json
 // @Param command body command.CreateUser true "Object to be created."
 // @Success 201 {string} string "Id of the created object"
-// @Failure 400 {object} responses.ErrorResponse
-// @Failure 422 {object} responses.ErrorResponse
-// @Failure 500 {object} responses.ErrorResponse
+// @Failure 400
+// @Failure 422
+// @Failure 500
 // @Router /api/v1/users [post]
 func (h HttpServer) CreateUser(c echo.Context) error {
 	item := command.CreateUser{}
@@ -61,10 +61,10 @@ func (h HttpServer) CreateUser(c echo.Context) error {
 // @Accept json
 // @Produce json
 // @Param id path string  true  "User Id"
-// @Success 200 {object} response.UserResponse
-// @Failure 400 {object} responses.ErrorResponse
-// @Failure 404 {object} responses.ErrorResponse
-// @Failure 500 {object} responses.ErrorResponse
+// @Success 200
+// @Failure 400
+// @Failure 404
+// @Failure 500
 // @Router /api/v1/users/{id} [get]
 func (h HttpServer) ReadUser(c echo.Context) error {
 	item := query.GetUserById{Id: c.Param("id")}
@@ -85,10 +85,10 @@ func (h HttpServer) ReadUser(c echo.Context) error {
 // @Produce json
 // @Param command body command.UpdateUser true "Object to be modified."
 // @Success 204
-// @Failure 400 {object} responses.ErrorResponse
-// @Failure 404 {object} responses.ErrorResponse
-// @Failure 422 {object} responses.ErrorResponse
-// @Failure 500 {object} responses.ErrorResponse
+// @Failure 400
+// @Failure 404
+// @Failure 422
+// @Failure 500
 // @Router /api/v1/users [patch]
 func (h HttpServer) UpdateUser(c echo.Context) error {
 	item := command.UpdateUser{}
@@ -118,9 +118,9 @@ func (h HttpServer) UpdateUser(c echo.Context) error {
 // @Produce json
 // @Param id path string  true  "User Id"
 // @Success 204
-// @Failure 400 {object} responses.ErrorResponse
-// @Failure 404 {object} responses.ErrorResponse
-// @Failure 500 {object} responses.ErrorResponse
+// @Failure 400
+// @Failure 404
+// @Failure 500
 // @Router /api/v1/users/{id} [delete]
 func (h HttpServer) DeleteUser(c echo.Context) error {
 	item := command.DeleteUser{Id: c.Param("id")}
