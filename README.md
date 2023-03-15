@@ -18,3 +18,7 @@ go test ./internal/app/... -cover
 ```
 
 Ir a http://localhost:3000 para ver swagger specification
+
+## Swagger
+
+![swagger](https://github.com/juanmaabanto/go-user-ms/blob/main/docs/swagger.png)
